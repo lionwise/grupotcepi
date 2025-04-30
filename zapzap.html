@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Entrada para Grupo WhatsApp</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      padding: 2rem; 
+    }
+    .hidden { display: none; }
+    .error { color: red; }
+    input, button { 
+      padding: 0.5rem; 
+      font-size: 1rem; 
+      margin-top: 0.5rem;
+    }
+    #qr { margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Digite o código de acesso</h1>
+  <input type="password" id="codeInput" placeholder="Código de acesso">
+  <button id="btnSubmit">Entrar</button>
+  <p id="msg" class="error hidden">Código inválido. Tente novamente.</p>
+  
+  <div id="content" class="hidden">
+    <p>✔️ Código correto! Clique no link ou escaneie o QR code para entrar:</p>
+    <a href="https://chat.whatsapp.com/DknmDXERZhB25w0ZAkrphf" target="_blank">Entrar no grupo</a>
+    <div id="qr">
+  <img
+    id="qrCodeImg"
+    alt="QR Code do grupo"
+  >
+</div>
+
+<script>
+  const grupoLink = 'https://chat.whatsapp.com/DknmDXERZhB25w0ZAkrphf';
+  // quando a senha estiver correta:
+  document.getElementById('qrCodeImg').src =
+    'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='
+    + encodeURIComponent(grupoLink);
+</script>
+
+  </div>
+  
+  <script>
+    const senha = '2025'; // ← defina aqui o código de acesso
+    document.getElementById('btnSubmit').addEventListener('click', () => {
+      const valor = document.getElementById('codeInput').value.trim();
+      if (valor === senha) {
+        document.getElementById('content').classList.remove('hidden');
+        document.getElementById('msg').classList.add('hidden');
+      } else {
+        document.getElementById('msg').classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
